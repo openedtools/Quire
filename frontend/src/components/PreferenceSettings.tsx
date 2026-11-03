@@ -1,0 +1,193 @@
+"use client"
+
+import { BRAND } from '@/lib/brand.generated';
+import { useEffect, useState } from "react"
+import { Switch } from "./ui/switch"
+import { FolderOpen } from "lucide-react"
+import { invoke } from "@tauri-apps/api/core"
+import { useConfig, NotificationSettings } from "@/contexts/ConfigContext"
+import { ThemeSettings } from "./ThemeSettings"
+import { MarkdownExportSettings } from "./MarkdownExportSettings"
+
+export function PreferenceSettings() {
+  const {
+    notificationSettings,
+    storageLocations,
+    isLoadingPreferences,
+    loadPreferences,
+    updateNotificationSettings
+  } = useConfig();
+
+  const [notificationsEnabled, setNotificationsEnabled] = useState<boolean | null>(null);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [previousNotificationsEnabled, setPreviousNotificationsEnabled] = useState<boolean | null>(null);
+
+  // Lazy load preferences on mount (only loads if not already cached)
+  useEffect(() => {
+    loadPreferences();
+  }, [loadPreferences]);
+
+  // Update notificationsEnabled when notificationSettings are loaded from global state
+  useEffect(() => {
+    if (notificationSettings) {
+      // Notification enabled means both started and stopped notifications are enabled
+      const enabled =
+        notificationSettings.notification_preferences.show_recording_started &&
+        notificationSettings.notification_preferences.show_recording_stopped;
+      setNotificationsEnabled(enabled);
+      if (isInitialLoad) {
+        setPreviousNotificationsEnabled(enabled);
+        setIsInitialLoad(false);
+      }
+    } else if (!isLoadingPreferences) {
+      // If not loading and no settings, use default
+      setNotificationsEnabled(true);
+      if (isInitialLoad) {
+        setPreviousNotificationsEnabled(true);
+        setIsInitialLoad(false);
+      }
+    }
+  }, [notificationSettings, isLoadingPreferences, isInitialLoad])
+
+  useEffect(() => {
+    // Skip update on initial load or if value hasn't actually changed
+    if (isInitialLoad || notificationsEnabled === null || notificationsEnabled === previousNotificationsEnabled) return;
+    if (!notificationSettings) return;
+
+    const handleUpdateNotificationSettings = async () => {
+      console.log("Updating notification settings to:", notificationsEnabled);
+
+      try {
+        // Update the notification preferences
+        const updatedSettings: NotificationSettings = {
+          ...notificationSettings,
+          notification_preferences: {
+            ...notificationSettings.notification_preferences,
+            show_recording_started: notificationsEnabled,
+            show_recording_stopped: notificationsEnabled,
+          }
+        };
+
+        console.log("Calling updateNotificationSettings with:", updatedSettings);
+        await updateNotificationSettings(updatedSettings);
+        setPreviousNotificationsEnabled(notificationsEnabled);
+        console.log("Successfully updated notification settings to:", notificationsEnabled);
+      } catch (error) {
+        console.error('Failed to update notification settings:', error);
+      }
+    };
+
+    handleUpdateNotificationSettings();
+  }, [notificationsEnabled, notificationSettings, isInitialLoad, previousNotificationsEnabled, updateNotificationSettings])
+
+  const handleOpenFolder = async (folderType: 'database' | 'models' | 'recordings') => {
+    try {
+      switch (folderType) {
+        case 'database':
+          await invoke('open_database_folder');
+          break;
+        case 'models':
+          await invoke('open_models_folder');
+          break;
+        case 'recordings':
+          await invoke('open_recordings_folder');
+          break;
+      }
+    } catch (error) {
+      console.error(`Failed to open ${folderType} folder:`, error);
+    }
+  };
+
+  // Show loading only if we're actually loading and don't have cached data
+  if (isLoadingPreferences && !notificationSettings && !storageLocations) {
+    return <div className="max-w-2xl mx-auto p-6">Loading Preferences...</div>
+  }
+
+  // Show loading if notificationsEnabled hasn't been determined yet
+  if (notificationsEnabled === null && !isLoadingPreferences) {
+    return <div className="max-w-2xl mx-auto p-6">Loading Preferences...</div>
+  }
+
+  // Ensure we have a boolean value for the Switch component
+  const notificationsEnabledValue = notificationsEnabled ?? false;
+
+  return (
+    <div className="space-y-6">
+      <ThemeSettings />
+
+      {/* Notifications Section */}
+      <div className="bg-paper rounded-lg border border-line p-6 ">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold text-ink mb-2">Notifications</h3>
+            <p className="text-sm text-ink-muted">Enable or disable notifications of start and end of meeting</p>
+          </div>
+          <Switch aria-label="Notifications" checked={notificationsEnabledValue} onCheckedChange={setNotificationsEnabled} />
+        </div>
+      </div>
+
+      <MarkdownExportSettings />
+
+      {/* Data Storage Locations Section */}
+      <div className="bg-paper rounded-lg border border-line p-6 ">
+        <h3 className="text-lg font-semibold text-ink mb-4">Data Storage Locations</h3>
+        <p className="text-sm text-ink-muted mb-6">
+          View and access where {BRAND.name} stores your data
+        </p>
+
+        <div className="space-y-4">
+          {/* Database Location */}
+          {/* <div className="p-4 border rounded-lg bg-surface">
+            <div className="font-medium mb-2">Database</div>
+            <div className="text-sm text-ink-muted mb-3 break-all font-mono text-xs">
+              {storageLocations?.database || 'Loading...'}
+            </div>
+            <button
+              onClick={() => handleOpenFolder('database')}
+              className="flex items-center gap-2 px-3 py-2 text-sm border border-line-strong rounded-md hover:bg-surface-hover transition-colors"
+            >
+              <FolderOpen className="w-4 h-4" />
+              Open Folder
+            </button>
+          </div> */}
+
+          {/* Models Location */}
+          {/* <div className="p-4 border rounded-lg bg-surface">
+            <div className="font-medium mb-2">Whisper Models</div>
+            <div className="text-sm text-ink-muted mb-3 break-all font-mono text-xs">
+              {storageLocations?.models || 'Loading...'}
+            </div>
+            <button
+              onClick={() => handleOpenFolder('models')}
+              className="flex items-center gap-2 px-3 py-2 text-sm border border-line-strong rounded-md hover:bg-surface-hover transition-colors"
+            >
+              <FolderOpen className="w-4 h-4" />
+              Open Folder
+            </button>
+          </div> */}
+
+          {/* Recordings Location */}
+          <div className="p-4 border rounded-lg bg-surface">
+            <div className="font-medium mb-2">Meeting Recordings</div>
+            <div className="text-sm text-ink-muted mb-3 break-all font-mono text-xs">
+              {storageLocations?.recordings || 'Loading...'}
+            </div>
+            <button
+              onClick={() => handleOpenFolder('recordings')}
+              className="flex items-center gap-2 px-3 py-2 text-sm border border-line-strong rounded-md hover:bg-surface-hover transition-colors"
+            >
+              <FolderOpen className="w-4 h-4" />
+              Open Folder
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-4 p-3 bg-accent-tint rounded-md">
+          <p className="text-xs text-accent-strong">
+            <strong>Note:</strong> Database and models are stored together in your application data directory for unified management.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}

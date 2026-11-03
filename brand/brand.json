@@ -1,0 +1,8 @@
+{
+  "name": "Quire",
+  "slug": "quire",
+  "bundleId": "com.openedtools.notes",
+  "windowTitle": "Quire",
+  "tagline": "Meeting notes that stay on your computer.",
+  "vaultDirName": "Quire"
+}

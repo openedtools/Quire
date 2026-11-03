@@ -1,0 +1,278 @@
+import React, { useState, useEffect } from 'react';
+import { Switch } from '@/components/ui/switch';
+import { FolderOpen, FolderInput } from 'lucide-react';
+import { invoke } from '@tauri-apps/api/core';
+import { DeviceSelection, SelectedDevices } from '@/components/DeviceSelection';
+import { toast } from 'sonner';
+import { RetentionSettings } from './RetentionSettings';
+import { useRecordingState } from '@/contexts/RecordingStateContext';
+import { useConfig } from '@/contexts/ConfigContext';
+import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
+
+interface RecordingFolderChoice {
+  path: string;
+  cloud_provider: string | null;
+}
+
+export interface RecordingPreferences {
+  save_folder: string;
+  auto_save: boolean;
+  file_format: string;
+  preferred_mic_device: string | null;
+  preferred_system_device: string | null;
+  /** Kept as it is when other settings are saved (spec F-TO-1) */
+  transcript_only?: boolean;
+  /** Set by its own switch in Settings, Models (plan PL3); kept as it is here */
+  keep_speech_model_ready?: boolean;
+}
+
+/** The switches saved elsewhere, read fresh so saving here never undoes them */
+async function withSwitches(prefs: RecordingPreferences): Promise<RecordingPreferences> {
+  const fresh = await invoke<RecordingPreferences>('get_recording_preferences').catch(() => null);
+  return fresh ? { ...prefs, transcript_only: fresh.transcript_only, keep_speech_model_ready: fresh.keep_speech_model_ready } : prefs;
+}
+
+interface RecordingSettingsProps {
+  onSave?: (preferences: RecordingPreferences) => void;
+}
+
+export function RecordingSettings({ onSave }: RecordingSettingsProps) {
+  const [preferences, setPreferences] = useState<RecordingPreferences>({
+    save_folder: '',
+    auto_save: true,
+    file_format: 'mp4',
+    preferred_mic_device: null,
+    preferred_system_device: null
+  });
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const { isRecording } = useRecordingState();
+  const { setSelectedDevices, updateRecordingsLocation } = useConfig();
+  const [cloudChoice, setCloudChoice] = useState<RecordingFolderChoice | null>(null);
+
+  // Load recording preferences on component mount
+  useEffect(() => {
+    const loadPreferences = async () => {
+      try {
+        const prefs = await invoke<RecordingPreferences>('get_recording_preferences');
+        setPreferences(prefs);
+      } catch (error) {
+        console.error('Failed to load recording preferences:', error);
+        // If loading fails, get default folder path
+        try {
+          const defaultPath = await invoke<string>('get_default_recordings_folder_path');
+          setPreferences(prev => ({ ...prev, save_folder: defaultPath }));
+        } catch (defaultError) {
+          console.error('Failed to get default folder path:', defaultError);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPreferences();
+  }, []);
+
+
+  const handleAutoSaveToggle = async (enabled: boolean) => {
+    const newPreferences = { ...preferences, auto_save: enabled };
+    setPreferences(newPreferences);
+    await savePreferences(newPreferences);
+  };
+
+  const handleDeviceChange = async (devices: SelectedDevices) => {
+    const newPreferences = {
+      ...preferences,
+      preferred_mic_device: devices.micDevice,
+      preferred_system_device: devices.systemDevice
+    };
+    setPreferences(newPreferences);
+    // Sync the in-memory selection ConfigContext exposes to the start path.
+    // Without this, the picker only writes to disk (loaded into context once at
+    // app mount), so a newly-chosen mic isn't honored until the next launch:
+    // start keeps sending the stale launch-time device.
+    setSelectedDevices(devices);
+    await savePreferences(newPreferences);
+  };
+
+  const handleOpenFolder = async () => {
+    try {
+      await invoke('open_recordings_folder');
+    } catch (error) {
+      console.error('Failed to open recordings folder:', error);
+    }
+  };
+
+
+  const applyFolder = async (path: string) => {
+    const updated = await withSwitches({ ...preferences, save_folder: path });
+    try {
+      await invoke('set_recording_preferences', { preferences: updated });
+      setPreferences(updated);
+      updateRecordingsLocation(path);
+      onSave?.(updated);
+      toast.success('Recordings folder changed', { description: `New recordings are saved in ${path}. Earlier recordings stay where they are.` });
+    } catch (error) {
+      toast.error('Could not use that folder', { description: String(error) });
+    }
+  };
+
+  const handleChangeFolder = async () => {
+    try {
+      const choice = await invoke<RecordingFolderChoice | null>('select_recording_folder');
+      if (!choice) return;
+      if (choice.cloud_provider) setCloudChoice(choice);
+      else await applyFolder(choice.path);
+    } catch (error) {
+      toast.error('Could not open the folder picker', { description: String(error) });
+    }
+  };
+
+  const savePreferences = async (prefs: RecordingPreferences) => {
+    setSaving(true);
+    try {
+      await invoke('set_recording_preferences', { preferences: await withSwitches(prefs) });
+      onSave?.(prefs);
+
+      // Show success toast with device details
+      const micDevice = prefs.preferred_mic_device || 'Default';
+      const systemDevice = prefs.preferred_system_device || 'Default';
+      toast.success("Device preferences saved", {
+        description: `Microphone: ${micDevice}, System Audio: ${systemDevice}`
+      });
+    } catch (error) {
+      console.error('Failed to save recording preferences:', error);
+      toast.error("Failed to save device preferences", {
+        description: error instanceof Error ? error.message : String(error)
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="animate-pulse">
+        <div className="h-4 bg-surface-hover rounded w-1/4 mb-4"></div>
+        <div className="h-8 bg-surface-hover rounded mb-4"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Recording Settings</h3>
+        <p className="text-sm text-ink-muted mb-6">
+          Configure how your audio recordings are saved during meetings.
+        </p>
+      </div>
+
+      {/* Auto Save Toggle */}
+      <div className="flex items-center justify-between p-4 border rounded-lg">
+        <div className="flex-1">
+          <div className="font-medium">Save Audio Recordings</div>
+          <div className="text-sm text-ink-muted">
+            Automatically save audio files when recording stops
+          </div>
+        </div>
+        <Switch
+          aria-label="Save audio recordings"
+          checked={preferences.auto_save}
+          onCheckedChange={handleAutoSaveToggle}
+          disabled={saving}
+        />
+      </div>
+
+      {/* Folder Location - Only shown when auto_save is enabled */}
+      {preferences.auto_save && (
+        <div className="space-y-4">
+          <div className="p-4 border rounded-lg bg-surface">
+            <div className="font-medium mb-2">Save Location</div>
+            <div className="text-sm text-ink-muted mb-3 break-all">
+              {preferences.save_folder || 'Default folder'}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={handleOpenFolder}
+                className="flex items-center gap-2 px-3 py-2 text-sm border border-line-strong rounded-md hover:bg-surface-hover transition-colors"
+              >
+                <FolderOpen className="w-4 h-4" />
+                Open Folder
+              </button>
+              <button
+                onClick={handleChangeFolder}
+                disabled={isRecording}
+                title={isRecording ? 'Stop the recording to change the folder' : undefined}
+                className="flex items-center gap-2 px-3 py-2 text-sm border border-line-strong rounded-md hover:bg-surface-hover transition-colors disabled:text-disabled disabled:cursor-not-allowed"
+              >
+                <FolderInput className="w-4 h-4" />
+                Change Folder
+              </button>
+            </div>
+          </div>
+          {cloudChoice && (
+            <ConfirmDialog
+              title={`This folder is synced by ${cloudChoice.cloud_provider}`}
+              body={`Recordings saved in ${cloudChoice.path} would be uploaded to ${cloudChoice.cloud_provider}. Meeting audio is private, so a folder that stays on this computer is safer. Use this folder anyway?`}
+              confirmLabel="Use this folder"
+              onConfirm={() => { const path = cloudChoice.path; setCloudChoice(null); void applyFolder(path); }}
+              onClose={() => setCloudChoice(null)}
+            />
+          )}
+
+          <div className="p-4 border rounded-lg bg-accent-tint">
+            <div className="text-sm text-accent-strong">
+              <strong>File Format:</strong> {preferences.file_format.toUpperCase()} files
+            </div>
+            <div className="text-xs text-accent-strong mt-1">
+              Recordings are saved with timestamp: recording_YYYYMMDD_HHMMSS.{preferences.file_format}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Info when auto_save is disabled */}
+      {!preferences.auto_save && (
+        <div className="p-4 border rounded-lg bg-warning-tint">
+          <div className="text-sm text-warning">
+            Audio recording is disabled. Enable "Save Audio Recordings" to automatically save your meeting audio.
+          </div>
+        </div>
+      )}
+
+      <RetentionSettings />
+
+      {/* Device Preferences */}
+      <div className="space-y-4">
+        <div className="border-t pt-6">
+          <h4 className="text-base font-medium text-ink mb-4">Default Audio Devices</h4>
+          <p className="text-sm text-ink-muted mb-4">
+            Set your preferred microphone and system audio devices for recording. These will be automatically selected when starting new recordings.
+          </p>
+
+          {isRecording && (
+            <p
+              role="status"
+              aria-live="polite"
+              className="text-sm text-warning bg-warning-tint border border-warning/40 rounded-md p-2 mb-4"
+            >
+              Device selection is locked while a recording is in progress. Connecting a new device mid-recording will not switch to it. Stop the current meeting to change devices.
+            </p>
+          )}
+
+          <div className="border rounded-lg p-4 bg-surface">
+            <DeviceSelection
+              selectedDevices={{
+                micDevice: preferences.preferred_mic_device,
+                systemDevice: preferences.preferred_system_device
+              }}
+              onDeviceChange={handleDeviceChange}
+              disabled={saving || isRecording}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

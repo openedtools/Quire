@@ -1,0 +1,271 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes vibrate {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.animate-vibrate {
+  animation: vibrate 0.3s linear;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.delay-75 {
+  animation-delay: 75ms;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+@layer base {
+  /* shadcn variables are aliases of the design tokens in src/styles/tokens.css.
+     html:root and html.dark outrank the plain :root and .dark blocks that
+     @blocknote/shadcn ships with its own (HSL) values. */
+  html:root,
+  html.dark {
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--paper);
+    --card-foreground: var(--ink);
+    --popover: var(--paper);
+    --popover-foreground: var(--ink);
+    --primary: var(--accent-strong);
+    --primary-foreground: var(--on-accent);
+    --secondary: var(--surface);
+    --secondary-foreground: var(--ink);
+    --muted: var(--surface);
+    --muted-foreground: var(--ink-muted);
+    --destructive: var(--danger);
+    --destructive-foreground: var(--on-accent);
+    --border: var(--line);
+    --input: var(--line-strong);
+    --ring: var(--accent);
+    --radius: var(--radius-control);
+    --chart-1: var(--accent);
+    --chart-2: var(--sage);
+    --chart-3: var(--warning);
+    --chart-4: var(--success);
+    --chart-5: var(--ink-muted);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  /* html, */
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  /* Serif for page titles only; section headings are sans for a cleaner, modern feel */
+  h1, h2 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+
+  h3, h4, h5 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  /* Visible focus on every control; no other shadows (spec F-UI-5, F-UI-8) */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Make the window draggable */
+  .titlebar {
+    -webkit-app-region: drag;
+    app-region: drag;
+  }
+
+  .no-drag {
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+  }
+
+  /* Custom scrollbar styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(var(--line));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--line-strong));
+  }
+
+  /* Firefox scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line)) transparent;
+  }
+}
+
+/* BlockNote rules live outside @layer base: Tailwind drops layered rules whose class
+   names never appear in our source files, and BlockNote adds these classes at runtime. */
+/* BlockNote's precompiled CSS reads hsl(var(--x)) and puts its own .dark class on the
+   editor container, so the editor gets the HSL copies of the tokens here. */
+html .bn-container.bn-shadcn {
+  --background: var(--hsl-paper);
+  --foreground: var(--hsl-ink);
+  --card: var(--hsl-paper);
+  --card-foreground: var(--hsl-ink);
+  --popover: var(--hsl-paper);
+  --popover-foreground: var(--hsl-ink);
+  --primary: var(--hsl-accent-strong);
+  --primary-foreground: var(--hsl-on-accent);
+  --secondary: var(--hsl-surface);
+  --secondary-foreground: var(--hsl-ink);
+  --muted: var(--hsl-surface);
+  --muted-foreground: var(--hsl-ink-muted);
+  --accent: var(--hsl-surface-hover);
+  --accent-foreground: var(--hsl-ink);
+  --destructive: var(--hsl-danger);
+  --destructive-foreground: var(--hsl-on-accent);
+  --border: var(--hsl-line);
+  --input: var(--hsl-line-strong);
+  --ring: var(--hsl-accent);
+  --bn-colors-editor-text: rgb(var(--ink));
+  --bn-colors-editor-background: rgb(var(--paper));
+  --bn-colors-menu-text: rgb(var(--ink));
+  --bn-colors-menu-background: rgb(var(--paper));
+  --bn-colors-tooltip-text: rgb(var(--ink));
+  --bn-colors-tooltip-background: rgb(var(--surface));
+  --bn-colors-hovered-text: rgb(var(--ink));
+  --bn-colors-hovered-background: rgb(var(--surface-hover));
+  --bn-colors-selected-text: rgb(var(--on-accent));
+  --bn-colors-selected-background: rgb(var(--accent-strong));
+  --bn-colors-disabled-text: rgb(var(--disabled));
+  --bn-colors-disabled-background: rgb(var(--surface));
+  --bn-colors-shadow: transparent;
+  --bn-colors-border: rgb(var(--line));
+  --bn-colors-side-menu: rgb(var(--ink-muted));
+}
+
+/* Summary lines the model added (spec F-NOTE-6) use the muted ink token */
+html .bn-container.bn-shadcn [data-text-color="gray"] {
+  color: rgb(var(--ink-muted));
+}
+
+/* BlockNote turns the outline off; the editing area needs a visible focus indicator too */
+html .bn-container .bn-editor:focus-visible {
+  outline: 2px solid rgb(var(--accent));
+  outline-offset: 4px;
+  border-radius: var(--radius-control);
+}
+
+/* BlockNote Editor - Override fixed dimensions for responsive layout */
+.bn-container {
+  width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+.bn-editor {
+  width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+/* Disable internal scrolling - let parent handle all scrolling */
+.ProseMirror {
+  overflow: visible !important;
+}
+
+/* Ensure BlockNote content area is responsive */
+.bn-block-outer {
+  max-width: 100% !important;
+}
+
+.bn-default-styles {
+  max-width: none !important;
+}
+
+/* Disable scrolling on any BlockNote wrapper elements */
+[data-node-type] {
+  overflow: visible !important;
+}

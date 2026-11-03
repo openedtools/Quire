@@ -1,0 +1,268 @@
+{
+  "thresholds": {
+    "text": 4.5,
+    "large": 3.0,
+    "icon": 3.0,
+    "border": 3.0
+  },
+  "pairs": [
+    {
+      "fg": "ink",
+      "bg": "paper",
+      "role": "text"
+    },
+    {
+      "fg": "ink",
+      "bg": "surface",
+      "role": "text"
+    },
+    {
+      "fg": "ink",
+      "bg": "surface-hover",
+      "role": "text"
+    },
+    {
+      "fg": "ink-muted",
+      "bg": "paper",
+      "role": "text",
+      "note": "secondary text and placeholders"
+    },
+    {
+      "fg": "ink-muted",
+      "bg": "surface",
+      "role": "text"
+    },
+    {
+      "fg": "ink-muted",
+      "bg": "surface-hover",
+      "role": "text"
+    },
+    {
+      "fg": "accent-strong",
+      "bg": "paper",
+      "role": "text",
+      "note": "links and small accent text"
+    },
+    {
+      "fg": "accent-strong",
+      "bg": "surface",
+      "role": "text"
+    },
+    {
+      "fg": "accent-strong",
+      "bg": "accent-tint",
+      "role": "text"
+    },
+    {
+      "fg": "on-accent",
+      "bg": "accent-strong",
+      "role": "text",
+      "note": "primary button label"
+    },
+    {
+      "fg": "on-accent",
+      "bg": "accent-strong-hover",
+      "role": "text"
+    },
+    {
+      "fg": "on-accent",
+      "bg": "accent-strong-pressed",
+      "role": "text"
+    },
+    {
+      "fg": "on-accent",
+      "bg": "danger",
+      "role": "text",
+      "note": "destructive button label"
+    },
+    {
+      "fg": "on-accent",
+      "bg": "sage",
+      "role": "text"
+    },
+    {
+      "fg": "danger",
+      "bg": "paper",
+      "role": "text"
+    },
+    {
+      "fg": "danger",
+      "bg": "surface",
+      "role": "text"
+    },
+    {
+      "fg": "danger",
+      "bg": "danger-tint",
+      "role": "text"
+    },
+    {
+      "fg": "success",
+      "bg": "paper",
+      "role": "text"
+    },
+    {
+      "fg": "success",
+      "bg": "surface",
+      "role": "text"
+    },
+    {
+      "fg": "success",
+      "bg": "success-tint",
+      "role": "text"
+    },
+    {
+      "fg": "warning",
+      "bg": "paper",
+      "role": "text"
+    },
+    {
+      "fg": "warning",
+      "bg": "surface",
+      "role": "text"
+    },
+    {
+      "fg": "warning",
+      "bg": "warning-tint",
+      "role": "text"
+    },
+    {
+      "fg": "sage",
+      "bg": "paper",
+      "role": "text"
+    },
+    {
+      "fg": "sage",
+      "bg": "surface",
+      "role": "text"
+    },
+    {
+      "fg": "ink",
+      "bg": "sage-tint",
+      "role": "text"
+    },
+    {
+      "fg": "ink",
+      "bg": "accent-tint",
+      "role": "text"
+    },
+    {
+      "fg": "ink",
+      "bg": "danger-tint",
+      "role": "text"
+    },
+    {
+      "fg": "ink",
+      "bg": "success-tint",
+      "role": "text"
+    },
+    {
+      "fg": "ink",
+      "bg": "warning-tint",
+      "role": "text"
+    },
+    {
+      "fg": "sage",
+      "bg": "sage-tint",
+      "role": "text",
+      "themes": [
+        "dark"
+      ],
+      "note": "light theme is 4.33, so sage text is not used on sage-tint there"
+    },
+    {
+      "fg": "line-strong",
+      "bg": "paper",
+      "role": "border"
+    },
+    {
+      "fg": "line-strong",
+      "bg": "surface",
+      "role": "border"
+    },
+    {
+      "fg": "line-strong",
+      "bg": "surface-hover",
+      "role": "border"
+    },
+    {
+      "fg": "accent",
+      "bg": "paper",
+      "role": "icon",
+      "note": "icons, large headings, focus ring"
+    },
+    {
+      "fg": "accent",
+      "bg": "surface",
+      "role": "icon"
+    },
+    {
+      "fg": "on-accent",
+      "bg": "accent",
+      "role": "large",
+      "note": "light theme 3.77: large text only, never small labels"
+    },
+    {
+      "fg": "speaker-1-ink",
+      "bg": "speaker-1",
+      "role": "text"
+    },
+    {
+      "fg": "speaker-2-ink",
+      "bg": "speaker-2",
+      "role": "text"
+    },
+    {
+      "fg": "speaker-3-ink",
+      "bg": "speaker-3",
+      "role": "text"
+    },
+    {
+      "fg": "speaker-4-ink",
+      "bg": "speaker-4",
+      "role": "text"
+    },
+    {
+      "fg": "speaker-5-ink",
+      "bg": "speaker-5",
+      "role": "text"
+    },
+    {
+      "fg": "speaker-6-ink",
+      "bg": "speaker-6",
+      "role": "text"
+    },
+    {
+      "fg": "speaker-7-ink",
+      "bg": "speaker-7",
+      "role": "text"
+    },
+    {
+      "fg": "speaker-8-ink",
+      "bg": "speaker-8",
+      "role": "text"
+    }
+  ],
+  "decorative": [
+    {
+      "fg": "line",
+      "bg": "paper",
+      "note": "dividers only"
+    },
+    {
+      "fg": "line",
+      "bg": "surface",
+      "note": "dividers only"
+    }
+  ],
+  "exempt": [
+    {
+      "fg": "disabled",
+      "note": "disabled controls are exempt from contrast (WCAG 1.4.3) but use their own token"
+    },
+    {
+      "fg": "accent-strong",
+      "bg": "surface-hover",
+      "note": "links are not placed on hovered rows; 4.44 in light"
+    }
+  ]
+}

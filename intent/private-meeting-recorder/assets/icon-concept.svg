@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="t d">
+  <title id="t">Quire icon concept</title>
+  <desc id="d">A terracotta letter Q drawn as a ring with a short diagonal tail, over a pale second ring that suggests a stack of folded sheets, on a cream tile.</desc>
+  <rect width="512" height="512" rx="112" fill="#FAF6EE"/>
+  <circle cx="272" cy="268" r="116" fill="none" stroke="#E4DACA" stroke-width="42"/>
+  <circle cx="254" cy="250" r="116" fill="none" stroke="#C4623F" stroke-width="42"/>
+  <path d="M322 318 L384 380" fill="none" stroke="#C4623F" stroke-width="42" stroke-linecap="round"/>
+</svg>

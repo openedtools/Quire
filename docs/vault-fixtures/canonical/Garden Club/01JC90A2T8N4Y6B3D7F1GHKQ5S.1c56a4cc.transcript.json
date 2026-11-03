@@ -1,0 +1,8 @@
+{
+  "quire": 1,
+  "note_id": "01JC90A2T8N4Y6B3D7F1GHKQ5S",
+  "segments": [
+    {"id":"seg-1","start":0.0,"end":4.5,"speaker":1,"text":"Welcome to the garden club budget meeting."},
+    {"id":"seg-2","start":4.5,"end":9.25,"speaker":2,"text":"We have \"three\" plots left, and one bench."}
+  ]
+}

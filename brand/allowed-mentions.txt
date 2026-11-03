@@ -1,0 +1,14 @@
+# Places where the earlier product's name may still appear. Every tracked file is scanned except
+# LICENSE.md, THIRD_PARTY_NOTICES.md and applied migrations (spec section 16, F-ID-9).
+# One entry per line: a file or glob, then "|", then the reason.
+# `pnpm lint` fails on any other mention, and on an entry that no longer matches one.
+
+# Reading data or paths that belong to the upstream product
+frontend/src-tauri/src/audio/recording_preferences.rs | the earlier default recordings folder name, used once to pin it as the setting (plan PR3)
+
+# The check itself has to name what it looks for
+frontend/scripts/lint/brand.mjs | the pattern this lint searches for
+frontend/tests/lint/brand-*.test.ts | test input for this lint
+
+# The planning record: old identifiers, folder names and hosts are quoted where the work changed them
+intent/private-meeting-recorder/*.md | historical identifiers in backticks; prose says "the upstream project"

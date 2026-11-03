@@ -1,0 +1,123 @@
+/*
+ * Design tokens: the only place colours are defined (spec 3.2).
+ * Each colour is an "R G B" channel triplet so Tailwind opacity modifiers work.
+ * The hex value is in the comment. scripts/lint/contrast.mjs reads this file and
+ * checks every pair listed in tokens.contrast.json, so keep one token per line.
+ */
+
+:root {
+  --paper: 250 246 238; /* #FAF6EE page background */
+  --surface: 242 235 221; /* #F2EBDD cards, sidebar, inputs */
+  --surface-hover: 238 230 215; /* #EEE6D7 hovered or selected rows */
+  --line: 228 218 202; /* #E4DACA decorative dividers */
+  --line-strong: 137 125 109; /* #897D6D control borders */
+  --ink: 43 38 34; /* #2B2622 body text */
+  --ink-muted: 107 97 85; /* #6B6155 secondary text, placeholders */
+  --accent: 196 98 63; /* #C4623F icons, large shapes, focus */
+  --accent-strong: 169 78 43; /* #A94E2B links, small accent text, primary fill */
+  --accent-strong-hover: 147 66 31; /* #93421F */
+  --accent-strong-pressed: 126 56 24; /* #7E3818 */
+  --accent-tint: 249 234 225; /* #F9EAE1 accent badge background */
+  --on-accent: 250 246 238; /* #FAF6EE label on a primary button */
+  --danger: 158 43 31; /* #9E2B1F */
+  --danger-tint: 246 225 219; /* #F6E1DB */
+  --success: 63 107 58; /* #3F6B3A */
+  --success-tint: 226 235 218; /* #E2EBDA */
+  --warning: 138 90 0; /* #8A5A00 */
+  --warning-tint: 246 232 204; /* #F6E8CC */
+  --sage: 107 108 84; /* #6B6C54 on this device and private */
+  --sage-tint: 229 232 216; /* #E5E8D8 chip and badge background */
+  --disabled: 179 169 153; /* #B3A999 disabled controls, exempt from contrast */
+  --scrim: 43 38 34; /* #2B2622 behind dialogs, used at 45 percent */
+  --scrim-alpha: 0.45;
+
+  /* Speaker chips: eight quiet, warm pairs, each text colour 4.5:1 or more on its tint */
+  --speaker-1: 244 225 215; /* #F4E1D7 peach */
+  --speaker-1-ink: 150 79 44; /* #964F2C */
+  --speaker-2: 225 229 234; /* #E1E5EA dusk */
+  --speaker-2-ink: 77 98 128; /* #4D6280 */
+  --speaker-3: 232 234 225; /* #E8EAE1 sage */
+  --speaker-3-ink: 93 103 66; /* #5D6742 */
+  --speaker-4: 237 222 226; /* #EDDEE2 rose */
+  --speaker-4-ink: 138 66 84; /* #8A4254 */
+  --speaker-5: 240 232 219; /* #F0E8DB sand */
+  --speaker-5-ink: 126 94 37; /* #7E5E25 */
+  --speaker-6: 238 223 221; /* #EEDFDD clay */
+  --speaker-6-ink: 148 68 56; /* #944438 */
+  --speaker-7: 237 235 222; /* #EDEBDE olive */
+  --speaker-7-ink: 107 102 46; /* #6B662E */
+  --speaker-8: 242 236 217; /* #F2ECD9 ochre */
+  --speaker-8-ink: 125 98 18; /* #7D6212 */
+
+  --radius-card: 8px;
+  --radius-control: 6px;
+  --font-sans: 'Source Sans 3 Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
+
+  /* HSL copies for @blocknote/shadcn, whose precompiled CSS reads hsl(var(--x)). Generated from the values above; not checked by the contrast lint. */
+  --hsl-paper: 40.0 54.5% 95.7%;
+  --hsl-surface: 40.0 44.7% 90.8%;
+  --hsl-surface-hover: 39.1 40.4% 88.8%;
+  --hsl-line: 36.9 32.5% 84.3%;
+  --hsl-line-strong: 34.3 11.4% 48.2%;
+  --hsl-ink: 26.7 11.7% 15.1%;
+  --hsl-ink-muted: 32.7 11.5% 37.6%;
+  --hsl-accent: 15.8 53.0% 50.8%;
+  --hsl-accent-strong: 16.7 59.4% 41.6%;
+  --hsl-on-accent: 40.0 54.5% 95.7%;
+  --hsl-danger: 5.7 67.2% 37.1%;
+}
+
+.dark {
+  --paper: 31 27 23; /* #1F1B17 */
+  --surface: 42 37 32; /* #2A2520 */
+  --surface-hover: 53 47 40; /* #352F28 */
+  --line: 58 51 43; /* #3A332B */
+  --line-strong: 133 122 107; /* #857A6B */
+  --ink: 239 232 220; /* #EFE8DC */
+  --ink-muted: 168 157 142; /* #A89D8E */
+  --accent: 224 138 102; /* #E08A66 */
+  --accent-strong: 224 138 102; /* #E08A66 */
+  --accent-strong-hover: 233 155 122; /* #E99B7A */
+  --accent-strong-pressed: 239 173 144; /* #EFAD90 */
+  --accent-tint: 61 43 34; /* #3D2B22 */
+  --on-accent: 31 27 23; /* #1F1B17 */
+  --danger: 240 138 122; /* #F08A7A */
+  --danger-tint: 61 36 32; /* #3D2420 */
+  --success: 143 194 133; /* #8FC285 */
+  --success-tint: 38 49 31; /* #26311F */
+  --warning: 224 176 90; /* #E0B05A */
+  --warning-tint: 58 46 23; /* #3A2E17 */
+  --sage: 169 179 147; /* #A9B393 */
+  --sage-tint: 49 53 40; /* #313528 */
+  --disabled: 92 83 74; /* #5C534A */
+  --scrim: 0 0 0; /* #000000 */
+  --scrim-alpha: 0.6;
+  --speaker-1: 65 46 37; /* #412E25 peach */
+  --speaker-1-ink: 204 150 123; /* #CC967B */
+  --speaker-2: 46 50 56; /* #2E3238 dusk */
+  --speaker-2-ink: 148 163 184; /* #94A3B8 */
+  --speaker-3: 53 56 46; /* #35382E sage */
+  --speaker-3-ink: 164 173 138; /* #A4AD8A */
+  --speaker-4: 59 43 47; /* #3B2B2F rose */
+  --speaker-4-ink: 194 147 159; /* #C2939F */
+  --speaker-5: 61 54 41; /* #3D3629 sand */
+  --speaker-5-ink: 198 165 108; /* #C6A56C */
+  --speaker-6: 60 44 42; /* #3C2C2A clay */
+  --speaker-6-ink: 201 149 141; /* #C9958D */
+  --speaker-7: 58 57 44; /* #3A392C olive */
+  --speaker-7-ink: 186 180 120; /* #BAB478 */
+  --speaker-8: 64 57 38; /* #403926 ochre */
+  --speaker-8-ink: 214 184 92; /* #D6B85C */
+  --hsl-paper: 30.0 14.8% 10.6%;
+  --hsl-surface: 30.0 13.5% 14.5%;
+  --hsl-surface-hover: 32.3 14.0% 18.2%;
+  --hsl-line: 32.0 14.9% 19.8%;
+  --hsl-line-strong: 34.6 10.8% 47.1%;
+  --hsl-ink: 37.9 37.3% 90.0%;
+  --hsl-ink-muted: 34.6 13.0% 60.8%;
+  --hsl-accent: 17.7 66.3% 63.9%;
+  --hsl-accent-strong: 17.7 66.3% 63.9%;
+  --hsl-on-accent: 30.0 14.8% 10.6%;
+  --hsl-danger: 8.1 79.7% 71.0%;
+}

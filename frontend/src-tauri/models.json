@@ -1,0 +1,235 @@
+{
+  "_about": "Every model file Quire can download, pinned to a revision and by SHA-256 (spec F-MOD-8). Checked live against the sources on 2026-11-02. Change a pin only on purpose.",
+  "parakeet_languages": {
+    "model": "parakeet-tdt-0.6b-v3-int8",
+    "codes": [
+      "bg",
+      "hr",
+      "cs",
+      "da",
+      "nl",
+      "en",
+      "et",
+      "fi",
+      "fr",
+      "de",
+      "el",
+      "hu",
+      "it",
+      "lv",
+      "lt",
+      "mt",
+      "pl",
+      "pt",
+      "ro",
+      "sk",
+      "sl",
+      "es",
+      "sv",
+      "ru",
+      "uk"
+    ]
+  },
+  "files": [
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v3-int8",
+      "file": "encoder-model.int8.onnx",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v3-onnx/resolve/8f23f0c03c8761650bdb5b40aaf3e40d2c15f1ce/encoder-model.int8.onnx",
+      "bytes": 652183999,
+      "sha256": "6139d2fa7e1b086097b277c7149725edbab89cc7c7ae64b23c741be4055aff09"
+    },
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v3-int8",
+      "file": "decoder_joint-model.int8.onnx",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v3-onnx/resolve/8f23f0c03c8761650bdb5b40aaf3e40d2c15f1ce/decoder_joint-model.int8.onnx",
+      "bytes": 18202004,
+      "sha256": "eea7483ee3d1a30375daedc8ed83e3960c91b098812127a0d99d1c8977667a70"
+    },
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v3-int8",
+      "file": "nemo128.onnx",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v3-onnx/resolve/8f23f0c03c8761650bdb5b40aaf3e40d2c15f1ce/nemo128.onnx",
+      "bytes": 139764,
+      "sha256": "a9fde1486ebfcc08f328d75ad4610c67835fea58c73ba57e3209a6f6cf019e9f"
+    },
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v3-int8",
+      "file": "vocab.txt",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v3-onnx/resolve/8f23f0c03c8761650bdb5b40aaf3e40d2c15f1ce/vocab.txt",
+      "bytes": 93939,
+      "sha256": "d58544679ea4bc6ac563d1f545eb7d474bd6cfa467f0a6e2c1dc1c7d37e3c35d"
+    },
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v2-int8",
+      "file": "encoder-model.int8.onnx",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v2-onnx/resolve/0bbb45a3365852604aef28b538a8f066f4ccaa85/encoder-model.int8.onnx",
+      "bytes": 652184014,
+      "sha256": "3e0581fda6ab843888b51e56d7ee78b6d5bc3237ec113af1f732d1d5286aa155"
+    },
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v2-int8",
+      "file": "decoder_joint-model.int8.onnx",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v2-onnx/resolve/0bbb45a3365852604aef28b538a8f066f4ccaa85/decoder_joint-model.int8.onnx",
+      "bytes": 8998286,
+      "sha256": "a449f49acd68979d418651dd2dcb737cc0f1bf0225e009e29ee326354edbf7d3"
+    },
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v2-int8",
+      "file": "nemo128.onnx",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v2-onnx/resolve/0bbb45a3365852604aef28b538a8f066f4ccaa85/nemo128.onnx",
+      "bytes": 139764,
+      "sha256": "a9fde1486ebfcc08f328d75ad4610c67835fea58c73ba57e3209a6f6cf019e9f"
+    },
+    {
+      "kind": "parakeet",
+      "model": "parakeet-tdt-0.6b-v2-int8",
+      "file": "vocab.txt",
+      "url": "https://huggingface.co/istupakov/parakeet-tdt-0.6b-v2-onnx/resolve/0bbb45a3365852604aef28b538a8f066f4ccaa85/vocab.txt",
+      "bytes": 9384,
+      "sha256": "ec182b70dd42113aff6c5372c75cac58c952443eb22322f57bbd7f53977d497d"
+    },
+    {
+      "kind": "whisper",
+      "model": "tiny",
+      "file": "ggml-tiny.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-tiny.bin",
+      "bytes": 77691713,
+      "sha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21"
+    },
+    {
+      "kind": "whisper",
+      "model": "base",
+      "file": "ggml-base.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base.bin",
+      "bytes": 147951465,
+      "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe"
+    },
+    {
+      "kind": "whisper",
+      "model": "small",
+      "file": "ggml-small.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-small.bin",
+      "bytes": 487601967,
+      "sha256": "1be3a9b2063867b937e64e2ec7483364a79917e157fa98c5d94b5c1fffea987b"
+    },
+    {
+      "kind": "whisper",
+      "model": "medium",
+      "file": "ggml-medium.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-medium.bin",
+      "bytes": 1533763059,
+      "sha256": "6c14d5adee5f86394037b4e4e8b59f1673b6cee10e3cf0b11bbdbee79c156208"
+    },
+    {
+      "kind": "whisper",
+      "model": "large-v3-turbo",
+      "file": "ggml-large-v3-turbo.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3-turbo.bin",
+      "bytes": 1624555275,
+      "sha256": "1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69"
+    },
+    {
+      "kind": "whisper",
+      "model": "large-v3",
+      "file": "ggml-large-v3.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3.bin",
+      "bytes": 3095033483,
+      "sha256": "64d182b440b98d5203c4f9bd541544d84c605196c4f7b845dfa11fb23594d1e2"
+    },
+    {
+      "kind": "whisper",
+      "model": "tiny-q5_1",
+      "file": "ggml-tiny-q5_1.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-tiny-q5_1.bin",
+      "bytes": 32152673,
+      "sha256": "818710568da3ca15689e31a743197b520007872ff9576237bda97bd1b469c3d7"
+    },
+    {
+      "kind": "whisper",
+      "model": "base-q5_1",
+      "file": "ggml-base-q5_1.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base-q5_1.bin",
+      "bytes": 59707625,
+      "sha256": "422f1ae452ade6f30a004d7e5c6a43195e4433bc370bf23fac9cc591f01a8898"
+    },
+    {
+      "kind": "whisper",
+      "model": "small-q5_1",
+      "file": "ggml-small-q5_1.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-small-q5_1.bin",
+      "bytes": 190085487,
+      "sha256": "ae85e4a935d7a567bd102fe55afc16bb595bdb618e11b2fc7591bc08120411bb"
+    },
+    {
+      "kind": "whisper",
+      "model": "medium-q5_0",
+      "file": "ggml-medium-q5_0.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-medium-q5_0.bin",
+      "bytes": 539212467,
+      "sha256": "19fea4b380c3a618ec4723c3eef2eb785ffba0d0538cf43f8f235e7b3b34220f"
+    },
+    {
+      "kind": "whisper",
+      "model": "large-v3-turbo-q5_0",
+      "file": "ggml-large-v3-turbo-q5_0.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3-turbo-q5_0.bin",
+      "bytes": 574041195,
+      "sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2"
+    },
+    {
+      "kind": "whisper",
+      "model": "large-v3-q5_0",
+      "file": "ggml-large-v3-q5_0.bin",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-large-v3-q5_0.bin",
+      "bytes": 1081140203,
+      "sha256": "d75795ecff3f83b5faa89d1900604ad8c780abd5739fae406de19f23ecd98ad1"
+    },
+    {
+      "kind": "summary",
+      "model": "qwen3.5:2b",
+      "file": "Qwen3.5-2B-Q4_K_M.gguf",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/f6d5376be1edb4d416d56da11e5397a961aca8ae/Qwen3.5-2B-Q4_K_M.gguf",
+      "bytes": 1280835840,
+      "sha256": "aaf42c8b7c3cab2bf3d69c355048d4a0ee9973d48f16c731c0520ee914699223"
+    },
+    {
+      "kind": "summary",
+      "model": "qwen3.5:4b",
+      "file": "Qwen3.5-4B-Q4_K_M.gguf",
+      "url": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/e87f176479d0855a907a41277aca2f8ee7a09523/Qwen3.5-4B-Q4_K_M.gguf",
+      "bytes": 2740937888,
+      "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4"
+    },
+    {
+      "kind": "summary",
+      "model": "gemma3:4b",
+      "file": "gemma-3-4b-it-Q4_K_M.gguf",
+      "url": "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/71506238f970075ca85125cd749c28b1b0eee84e/google_gemma-3-4b-it-Q4_K_M.gguf",
+      "bytes": 2489758112,
+      "sha256": "4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94"
+    },
+    {
+      "kind": "summary",
+      "model": "gemma3:1b",
+      "file": "gemma-3-1b-it-Q8_0.gguf",
+      "url": "https://huggingface.co/bartowski/google_gemma-3-1b-it-GGUF/resolve/116f76234503685a98f572982177b11d44ec8ff1/google_gemma-3-1b-it-Q8_0.gguf",
+      "bytes": 1069306624,
+      "sha256": "375e12a4a18929a641f9744b060d4a7cf4e279530750555828ec0c117870bc96"
+    },
+    {
+      "kind": "speaker",
+      "model": "wespeaker-resnet34",
+      "file": "wespeaker_en_voxceleb_resnet34.onnx",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/speaker-recongition-models/wespeaker_en_voxceleb_resnet34.onnx",
+      "bytes": 26534365,
+      "sha256": "5ef208a9da1453335308a6b6f4e6dfbd7e183a38b604de0a57664f45d257fe94"
+    }
+  ]
+}

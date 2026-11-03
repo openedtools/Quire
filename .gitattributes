@@ -1,0 +1,6 @@
+# Database migrations: stored with LF, checked out with each system's own line endings (LF on a
+# Mac, CRLF on Windows). sqlx checksums every byte, and each install's database was created from
+# the line endings of the build that made it: Mac builds embed LF, Windows builds embed CRLF (the
+# Mac cross-build converts them, see frontend/scripts/build-windows-on-mac.sh). Never change this
+# without a migration plan for existing databases (plan PK2).
+frontend/src-tauri/migrations/*.sql text

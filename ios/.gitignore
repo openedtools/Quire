@@ -1,0 +1,8 @@
+# Build output and local signing: never committed (spec NF-IOS-2)
+.build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+Local.xcconfig
+*.mobileprovision
+/Quire.xcodeproj/

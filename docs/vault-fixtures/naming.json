@@ -1,0 +1,150 @@
+{
+  "about": "Automatic meeting names (plan.md Phase L, PL1 and PL2). Shared by the desktop and the iPhone app; every name here is made up.",
+  "defaultTitles": {
+    "yes": [
+      "Meeting 03_11_26_14_05_09",
+      "Meeting 2026-11-03_14-05-09",
+      "Meeting, 3 Nov 2026 14:05",
+      "Meeting, 21 Feb 2027 09:30",
+      "",
+      "Recording, 3 Nov 2026 14:05",
+      "Recording, 21 Feb 2027 09:30"
+    ],
+    "no": [
+      "Budget review",
+      "2026-11-03 Budget review",
+      "Meeting with the garden club",
+      "Meeting 3",
+      "Recording studio plans for 2027",
+      "Weekly sync 14:05",
+      "Recording session 2026 rehearsal 10:30",
+      "Recording Nov 3, 2026 at 2:05 PM"
+    ]
+  },
+  "topics": [
+    {
+      "raw": "Budget review",
+      "topic": "Budget review"
+    },
+    {
+      "raw": "  \"Spring planting schedule\".  ",
+      "topic": "Spring planting schedule"
+    },
+    {
+      "raw": "Title: Library opening hours",
+      "topic": "Library opening hours"
+    },
+    {
+      "raw": "# Topic: **Bake sale volunteers**",
+      "topic": "Bake sale volunteers"
+    },
+    {
+      "raw": "<think>The meeting is about the roof.</think>\nRoof repair quotes",
+      "topic": "Roof repair quotes"
+    },
+    {
+      "raw": "\n\nNew bus timetable\nThis meeting covered the timetable.",
+      "topic": "New bus timetable"
+    },
+    {
+      "raw": "Plans for the community garden water tap and the new shed",
+      "topic": "Plans for the community garden water"
+    },
+    {
+      "raw": "\u201cChoir rehearsal times\u201d",
+      "topic": "Choir rehearsal times"
+    },
+    {
+      "raw": "Name: Path/Gate: repairs?",
+      "topic": "PathGate repairs"
+    },
+    {
+      "raw": "...",
+      "topic": null
+    },
+    {
+      "raw": "   ",
+      "topic": null
+    },
+    {
+      "raw": "<think>still thinking",
+      "topic": null
+    }
+  ],
+  "formats": [
+    {
+      "pattern": "{date} {topic}",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "2026-11-03 Budget review"
+    },
+    {
+      "pattern": "{topic}",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "Budget review"
+    },
+    {
+      "pattern": "{date} {time} {topic}",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "2026-11-03 14.05 Budget review"
+    },
+    {
+      "pattern": "{folder} - {topic}",
+      "topic": "Budget review",
+      "folder": "Garden Club",
+      "title": "Garden Club - Budget review"
+    },
+    {
+      "pattern": "{folder} - {topic}",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "Budget review"
+    },
+    {
+      "pattern": "{topic} ({date})",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "Budget review (2026-11-03)"
+    },
+    {
+      "pattern": "  {date}   {topic}  ",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "2026-11-03 Budget review"
+    },
+    {
+      "pattern": "{date}: {topic}?",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "2026-11-03 Budget review"
+    },
+    {
+      "pattern": "Notes {unknown} {topic}",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "Notes {unknown} Budget review"
+    },
+    {
+      "pattern": "",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "2026-11-03 Budget review"
+    },
+    {
+      "pattern": "{folder}",
+      "topic": "Budget review",
+      "folder": "",
+      "title": "2026-11-03 Budget review"
+    }
+  ],
+  "date": {
+    "year": 2026,
+    "month": 11,
+    "day": 3,
+    "hour": 14,
+    "minute": 5
+  },
+  "defaultPattern": "{date} {topic}"
+}
