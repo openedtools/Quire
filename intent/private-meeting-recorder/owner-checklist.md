@@ -2,10 +2,11 @@
 
 Things only you can do, collected from every phase. Tick them off in any order within each group; the groups are in the order that unblocks the most.
 
-Last updated: 2026-11-03, after Phase N (before the clean history).
+Last updated: 2026-11-03, after Phase N and the clean history.
 
 ## 1. Decisions waiting for you
-- [ ] **PN6, the GitHub history:** replacing it cannot be undone once pushed. I will ask you once more, after you have seen the new release work.
+- [x] **PN6, the GitHub history:** done. GitHub is one commit now; the old history is backed up in `~/Developer/backups` on the Mac.
+- [ ] **On the PC:** delete the old Quire folder and clone again (`git clone https://github.com/openedtools/Quire.git`). A `git pull` will not work after the rewrite.
 
 ## 2. TestFlight set-up (a browser on the Mac, about 15 minutes)
 - [ ] developer.apple.com, Certificates, IDs & Profiles, Identifiers, **+**, App ID, App: bundle ID `com.openedtools.notes`, description "Quire" (skip if it is already listed).
@@ -40,4 +41,3 @@ Last updated: 2026-11-03, after Phase N (before the clean history).
 
 ## Notes
 - The screenshots I take use made-up meetings only; none of your real meetings are opened.
-- If PN6 (the clean history) goes ahead, the PC needs a fresh clone of the repository afterwards.
